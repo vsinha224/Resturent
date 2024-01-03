@@ -43,9 +43,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                    <a class="dropdown-item catef" href="<?php echo base_url('menu')?>" data-toggle="modal"  data-target="#tableoption11">Dining In</a>
-                    <a class="dropdown-item catef" href="<?php echo base_url('menu')?>" data-toggle="modal"  data-target="#tableoption11">Pickup</a>
-                    <a class="dropdown-item catef" href="<?php echo base_url('menu')?>" data-toggle="modal"  data-target="#tableoption11">Delivery</a>
+                    <a class="dropdown-item table-option catef" href="<?php echo base_url('menu')?>" data-toggle="modal"  data-name="Dine-in" data-target="#tableoption11">Dining In</a>
+                    <a class="dropdown-item table-option catef" href="<?php echo base_url('menu')?>" data-toggle="modal"  data-name="Pickup" data-target="#tableoption11">Pickup</a>
+                    <a class="dropdown-item table-option catef" href="<?php echo base_url('menu')?>" data-toggle="modal"  data-name="Home Delivary" data-target="#tableoption11">Delivery</a>
             </div>
         </div>
     </div>
@@ -60,7 +60,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <?php if(!empty($getkitchen)){
+
+                <?php 
+                if(!empty($getkitchen)){
                     foreach ($getkitchen as $key => $value) {?>
                         <a class="dropdown-item catef" href="<?php echo base_url('menu')?>?<?php echo $value->kitchenid; ?>" data-kitchen ="<?php echo $value->kitchenid; ?>"><?php echo $value->kitchen_name; ?></a>
                    <?php  }
@@ -115,7 +117,7 @@ if (!empty($testymenu)) {
                         ?>
                         <div class="col-sm-4">
                             <div class="home-cat especial">
-                                <button type="button" class="btn btn-primary category" data-toggle="modal" data-id="<?php echo $value->CategoryID; ?>" data-target="#tableoption"><?php echo $value->Name; ?></button>
+                                <button type="button" class="btn btn-primary category" data-toggle="modal" data-id="<?php echo $value->CategoryID; ?>" data-name="<?php echo $value->Name; ?>" data-target="#tableoption"><?php echo $value->Name; ?></button>
                                 
                              </div>
                         </div>
@@ -181,10 +183,16 @@ button:focus-visible{
 }
 
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script>
 $(".category").click(function() {
    var getdata = $(this).data('id');
    $(".catef").each((item,obj)=>{
+       if($(this).data('name') == "CARTA"&&$(obj).html() =='ENTRY'){
+        $(obj).addClass('d-none')
+       }else{
+        $(obj).removeClass('d-none')
+       }
         const href = obj.getAttribute("href");
         obj.setAttribute("href",`${href}&${getdata}`)
     })
@@ -192,6 +200,10 @@ $(".category").click(function() {
    //var url = "<?php echo base_url();?>menu?"+ getdata;
    // $('.catef').attr("href",url);
 
+});
+$(".table-option").click(function() {
+   var tableOption = $(this).data('name');
+    $.cookie('tableOption', tableOption, { expires: 1, path: '/' });
 });
 
 </script>

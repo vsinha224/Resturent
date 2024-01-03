@@ -20,6 +20,12 @@
                         </div>
                     </div>
                       <div class="form-group row">
+                        <label for="price" class="col-sm-4 col-form-label"><?php echo display('price')?> *</label>
+                        <div class="col-sm-8">
+                            <input name="price" class="form-control" type="text" placeholder="<?php echo display('price')?>" id="price"  value="<?php echo (!empty($categoryinfo->price)?$categoryinfo->price:null) ?>" required="">
+                        </div>
+                    </div>
+                      <div class="form-group row">
                         <label for="lastname" class="col-sm-4 col-form-label"><?php echo display('parent_cat')?></label>
                         <div class="col-sm-8">
                        <select name="Parentcategory" class="form-control">

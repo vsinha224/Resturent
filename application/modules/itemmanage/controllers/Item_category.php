@@ -105,6 +105,7 @@ class Item_category extends MX_Controller {
 		$data['category']   = (Object) $postData = array(
 	   'CategoryID'     => $this->input->post('CategoryID',true),
 	   'Name'     	=> $this->input->post('categoryname',true), 
+	   'price'   => $this->input->post('price',true),
 	   'parentid'           =>$this->input->post('Parentcategory',true),
 	   'CategoryIsActive'   => $this->input->post('status',true),
 	   'isoffer'     		=> $isoffer, 
@@ -152,6 +153,7 @@ class Item_category extends MX_Controller {
 		$data['category']   = (Object) $postData = array(
 	   'CategoryID'     => $this->input->post('CategoryID',true),
 	   'Name'     	=> $this->input->post('categoryname',true), 
+	   'price'     	=> $this->input->post('price',true), 
 	   'parentid'           =>$this->input->post('Parentcategory',true),
 	   'CategoryIsActive'   => $this->input->post('status',true),
 	   'isoffer'     		=> $isoffer, 

@@ -215,15 +215,24 @@ if(!empty($this->cart->contents())){ $totalqty= count($this->cart->contents());}
                                 <a href="<?php echo base_url();?>menu" class="btn-dark mt-0">Continue Shopping</a>
                                 <!--<a href="#" class="btn-dark mt-0">Update Cart</a>-->
                             </div>
-							<div class="row" style="display:none">
+							<div class="row ">
                             
                                 <div class="col-sm-5" >
                                 <div class="shipping_part shipping_custom mt-5">
                                     <h5 class="shipping_custom_heading"><?php echo display('shipping_method')?></h5>
                                     <div class="radios shipping_custom_box" id="payment">
-                                     <?php foreach($shippinginfo as $shipment){?>
+
+                                     <?php 
+                                     
+                                     foreach($shippinginfo as $shipment){?>
                                         <div class="radio">
-                                            <input checked type="radio" name="payment_method" id="payment_method_cre<?php echo $shipment->ship_id;?>" data-parent="#payment" data-target="#description_cre" value="<?php echo $shipment->shippingrate;?>" onchange="getcheckbox('<?php echo $shipment->shippingrate;?>','<?php echo $shipment->shipping_method;?>');">
+                                            <input 
+                                            <?php 
+                                            if(($_COOKIE['tableOption'] ?? 'Pickup') == $shipment->shipping_method) {
+                                            ?>
+                                            checked 
+                                            <?php }?>
+                                            type="radio" name="payment_method" id="payment_method_cre<?php echo $shipment->ship_id;?>" data-parent="#payment" data-target="#description_cre" value="<?php echo $shipment->shippingrate;?>" onchange="getcheckbox('<?php echo $shipment->shippingrate;?>','<?php echo $shipment->shipping_method;?>');">
                                             <label for="payment_method_cre<?php echo $shipment->ship_id;?>" class="shipping"> 
                                                 <span class="checker"></span>
                                                 <?php echo $shipment->shipping_method;?> - <?php if($this->storecurrency->position==1){echo $this->storecurrency->curr_icon;}?><?php echo $shipment->shippingrate;?><?php if($this->storecurrency->position==2){echo $this->storecurrency->curr_icon;}?>

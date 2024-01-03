@@ -63,7 +63,7 @@
                     <div class="form-group row">
                         <label for="category" class="col-sm-4 col-form-label"><?php echo display('category') ?></label>
                         <div class="col-sm-8">
-                        <select name="CategoryID" class="form-control" required="">
+                        <select name="CategoryID" class="form-control CategoryID-dropdown" id="CategoryID-dropdown" required="">
                             <option value="" selected="selected"><?php echo display('category_name') ?></option> 
                             <?php foreach($categories as $caregory){?>
                             <option value="<?php echo $caregory->CategoryID;?>" class='bolden' <?php if($productinfo->CategoryID==$caregory->CategoryID){echo "selected";}?>><strong><?php echo $caregory->Name;?></strong></option>
@@ -102,6 +102,12 @@
                         <label for="itemnotes" class="col-sm-4 col-form-label"><?php echo display('notes') ?> </label>
                         <div class="col-sm-8">
                             <input name="itemnotes" class="form-control" type="text" placeholder="<?php echo display('notes') ?>" id="itemnotes"  value="<?php echo (!empty($productinfo->itemnotes)?$productinfo->itemnotes:null) ?>">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="price" class="col-sm-4 col-form-label"><?php echo display('price') ?> </label>
+                        <div class="col-sm-8">
+                            <input name="price" class="form-control" type="text" placeholder="<?php echo display('price') ?>" id="price"  value="<?php echo (!empty($productinfo->price)?$productinfo->price:null) ?>">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -242,3 +248,28 @@
     </div>
 </div>
 <script src="<?php echo base_url('application/modules/itemmanage/assets/js/addfooditem_script.js'); ?>" type="text/javascript"></script>
+
+<script>
+    var categories = <?php echo json_encode($categories); ?>;
+    
+    var especialCategory = categories.find(category => category.Name === "ESPECIAL");
+    var especialPrice = especialCategory ? especialCategory.price : null;
+  if($('.CategoryID-dropdown').val() == 1){
+    if(especialPrice > 0){
+        $('#price').val(especialPrice).attr('disabled',true)
+    }else{
+        $('#price').val(especialPrice).attr('disabled',false)
+
+    }
+
+}
+$('.CategoryID-dropdown').on("change",function(){
+    if(especialPrice > 0 && $(this).val() ==1){
+        $('#price').val(especialPrice).attr('disabled',true)
+    }else{
+        $('#price').val(especialPrice).attr('disabled',false)
+
+    }
+})
+</script>
+

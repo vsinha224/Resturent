@@ -180,6 +180,7 @@ class Item_food extends MX_Controller {
 	   'ProductsID'     		=> $this->input->post('ProductsID'),
 	   'CategoryID'     		=> $this->input->post('CategoryID'), 
 	   'ProductName'   			=> $this->input->post('foodname',true),
+	   'price'   			    => $this->input->post('price',true),
 	   'component'              => $this->input->post('component',true),
 	   'itemnotes'              => $this->input->post('itemnotes',true),
 	   'menutype'               => $uniqueStr,
